@@ -15,7 +15,9 @@ mongoclient = MongoClient(MONGODB_URL)
 
 inv_db = mongoclient['development']
 
-product_collection = inv_db["product-collection"]
+# print(dir(inv_db))
+# print(list(inv_db.list_collections()))
+product_collection = inv_db["product_collection"]
 
 # print(product_collection.find())
 

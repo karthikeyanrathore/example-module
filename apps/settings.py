@@ -1,4 +1,3 @@
-
 BACKEND_CORS_ORIGINS = 1
 
 API_PREFIX = "/v1"
