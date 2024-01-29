@@ -1,0 +1,5 @@
+# Takes lot's of volume, need to use smaller docker image
+FROM mongo:6.0.13 
+
+# https://github.com/docker-library/mongo/issues/329#issuecomment-460858099
+COPY scripts/custom-user.sh /docker-entrypoint-initdb.d/

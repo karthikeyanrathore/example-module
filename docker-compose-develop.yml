@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+
+  products-db:
+    # docker exec -it products-db mongosh -u mongodb -p mongodb products-db/development
+    container_name: products-db
+    build:
+      context: .
+      dockerfile: Dockerfile.database
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=development
+      - MONGO_NON_ROOT_USERNAME=mongodb
+      - MONGO_NON_ROOT_PASSWORD=mongodb
+    volumes:
+      # Persist data that is stored in db after
+      # container is shutdown.
+      - product-db_data:/data/db
+    networks:
+      - example-module-net
+    ports:
+      - 27017:27017
+  
+ 
+
+volumes:
+  product-db_data:
+
+networks:
+  example-module-net:
