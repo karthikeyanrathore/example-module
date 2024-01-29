@@ -1,13 +1,15 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-
+import os
 
 MONGO_NON_ROOT_USERNAME = "mongodb"
 MONGO_NON_ROOT_PWD = "mongodb"
 MONGO_INITDB_DATABASE = "development"
-MONGODB_URL  = f"mongodb://{MONGO_NON_ROOT_USERNAME}:{MONGO_NON_ROOT_PWD}@localhost:27017/{MONGO_INITDB_DATABASE}"
+MONGO_HOST = os.getenv("MONGO_HOST", "products-db")
+MONGODB_URL  = f"mongodb://{MONGO_NON_ROOT_USERNAME}:{MONGO_NON_ROOT_PWD}@{MONGO_HOST}:27017/{MONGO_INITDB_DATABASE}"
 
-mongoclient = MongoClient(MONGODB_URL)
+print ("[INFO] Ok, connecting to mongoDB server. connection timeout is set to 10sec.")
+mongoclient = MongoClient(MONGODB_URL, connectTimeoutMS=10000)
 
 # print(dir(mongoclient))
 

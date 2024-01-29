@@ -20,14 +20,43 @@ services:
       # container is shutdown.
       - product-db_data:/data/db
     networks:
-      - example-module-net
-    ports:
-      - 27017:27017
+      - product-api-net
+    command: mongod --quiet --logpath /dev/null
+    # ports:
+    #   - 27017:27017
   
+  products-api-develop:
+    hostname: products-api-develop
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_DB_HOST=products-db
+    depends_on:
+      - products-db
+    # https://docs.docker.com/config/containers/start-containers-automatically/#use-a-restart-policy
+    restart: unless-stopped
+    networks:
+      - product-api-net
+    # ports:
+    #   - "9000:9000"
+
+  nginx-service:
+    container_name: nginx-service
+    build:
+      context: nginx
+      dockerfile: Dockerfile.develop
+    restart: unless-stopped
+    networks:
+      - product-api-net
+    ports:
+      - "80:80"
+    depends_on:
+      - products-api-develop
  
 
 volumes:
   product-db_data:
 
 networks:
-  example-module-net:
+  product-api-net:
