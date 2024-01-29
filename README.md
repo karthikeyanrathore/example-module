@@ -29,7 +29,7 @@ curl --request GET \
 2. order products
 ```cURL
 curl --request POST \
-  --url http://0.0.0.0:9000/v1/order \
+  --url http://0.0.0.0:80/v1/order \
   --header 'Content-Type: application/json' \
   --data '{
 	"items": [
