@@ -18,34 +18,4 @@ docker-compose -f docker-compose-develop.yml up
 docker-compose -f docker-compose-develop.yml down -v --remove-orphans;
 ```
 
-## Sample API calls
-
-1. products in inventory
-```cURL
-curl --request GET \
-  --url 'http://0.0.0.0:80/v1/products?offset=3&limit=2'
-```
-
-2. order products
-```cURL
-curl --request POST \
-  --url http://0.0.0.0:80/v1/order \
-  --header 'Content-Type: application/json' \
-  --data '{
-	"items": [
-		{
-			"productId": "65b76c98263d7bafcae46778",
-			"boughtQuantity": 2
-		},
-		{
-			"productId": "65b76c98263d7bafcae46778",
-			"boughtQuantity": 2
-		}
-		],
-	"user_address":{
-		"city": "delhi",
-		"country": "IN",
-		"zipcode": 112122
-	}
-}'
-```
+vim  set tabstop=2
